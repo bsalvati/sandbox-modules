@@ -12,20 +12,21 @@ Blog.modules.events = function(box){
 
 };
 Blog.modules.services = function(box){
-        box.getUsers = function(){}
+        box.getUsers = function(){console.log('retrieving users!')}
 };
 
 function Blog(){
     var args = Array.prototype.slice.call(arguments),
         callback = args.pop(),
-        modules = $.isArray(args)?args:args[0];
+        modules = $.isArray(args)?args:args[0],
+        i;
 
     if(!(this instanceof Blog)){
         return new Blog(modules, callback)
     }
 
-    for(var module in modules) {
-        Blog.modules[module](this);
+    for(i =0; i< modules.length; i+=1){
+        Blog.modules[modules[i]](this);
     }
 
     callback(this);
